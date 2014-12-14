@@ -76,7 +76,7 @@ intervalOfStep[which.max(intervalOfStep$steps),]$interval
 ## 288 Levels: 0 10 100 1000 1005 1010 1015 1020 1025 1030 1035 1040 ... 955
 ```
 
-It is the **835th** interval.
+It is the 835th interval.
 
 ## Imputing missing values  
 
@@ -105,7 +105,8 @@ interval2steps<-function(interval){
 
 
 ```r
-activity.new<-activity   # Make a new dataset with the original data
+#Make a copy of original data and filled it with the mean value of step in intervals which have missing value.
+activity.new<-activity
 for(i in 1:nrow(activity.new)){
     if(is.na(activity.new[i,]$steps)){
         activity.new[i,]$steps<-interval2steps(activity.new[i,]$interval)
@@ -142,24 +143,26 @@ median(totalstep2$steps)
 
 
 5. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?  
-* The mean value is the smae, however the median value changed a little to align with mean value.    
+
+* The mean value is the smae, however the median value changed a little bit and align with mean value.    
 
 ## Are there differences in activity patterns between weekdays and weekends?   
 
 * Create a new factor variable in the dataset with two levels “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
 
 ```r
-activity.new$day=ifelse(as.POSIXlt(as.Date(activity.new$date))$wday%%6==0,"weekend","weekday") 
-activity.new$day=factor(activity.new$day,levels=c("weekday","weekend"))
+activity.new$day=ifelse(as.POSIXlt(activity.new$date)$wday%%6==0,"weekends","weekday") 
+activity.new$day=factor(activity.new$day,levels=c("weekday","weekends"))
 ```
 
 
 * Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). The plot should look something like the following, which was creating using simulated data:
 
+
 ```r
-intervalByDay=aggregate(steps~interval+day,activity.new,mean)
 library(lattice)
-xyplot(steps~interval|factor(day),data=intervalByDay,aspect=1/2,type="l")
+intervalByDay=aggregate(steps~interval+day,activity.new,mean)
+xyplot(steps~interval|factor(day),data=intervalByDay,aspect=0.5,type="l")
 ```
 
 ![](./PA1_template_files/figure-html/unnamed-chunk-12-1.png) 
