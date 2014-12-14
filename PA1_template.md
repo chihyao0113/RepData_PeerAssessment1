@@ -28,7 +28,7 @@ totalstep<-aggregate(steps~date,data=activity,sum,na.rm=TRUE)
 1.Make a histogram of the total number of steps taken each day
 
 ```r
-hist(totalstep$steps,breaks=50,main='Hist of Steps in Total Step')
+hist(totalstep$steps,breaks=50,main='Hist of Steps in Total Step',col='lightblue')
 ```
 
 ![](./PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
@@ -119,7 +119,7 @@ for(i in 1:nrow(activity.new)){
 
 ```r
 totalstep2<-aggregate(steps~date,data=activity.new,sum)
-hist(totalstep2$steps,breaks=50)
+hist(totalstep2$steps,breaks=50,col='lightblue',main='Hist of Steps in Total Step')
 ```
 
 ![](./PA1_template_files/figure-html/unnamed-chunk-10-1.png) 
