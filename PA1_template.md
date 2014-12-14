@@ -1,6 +1,12 @@
-# Reproducible Research: Peer Assessment 1
-Marcus Chen  
-Saturday, December 13, 2014  
+---
+title: 'Reproducible Research: Peer Assessment 1'
+author: "Marcus Chen"
+date: "Saturday, December 13, 2014"
+output:
+  html_document:
+    keep_md: yes
+    toc: yes
+---
 ## Loading the data  
 
 
@@ -31,7 +37,7 @@ totalstep<-aggregate(steps~date,data=activity,sum,na.rm=TRUE)
 hist(totalstep$steps,breaks=50,main='Hist of Steps in Total Step',col='lightblue')
 ```
 
-![](./PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
 2.Calculate and report the **mean** and **median** total number of steps taken per day  
 
 
@@ -63,7 +69,7 @@ intervalOfStep<-aggregate(steps~interval,data=activity,mean,na.rm=TRUE)
 plot(steps~interval,data=intervalOfStep,type="l")
 ```
 
-![](./PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
 
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?  
 
@@ -122,7 +128,7 @@ totalstep2<-aggregate(steps~date,data=activity.new,sum)
 hist(totalstep2$steps,breaks=50,col='lightblue',main='Hist of Steps in Total Step')
 ```
 
-![](./PA1_template_files/figure-html/unnamed-chunk-10-1.png) 
+![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10-1.png) 
 
 ```r
 mean(totalstep2$steps)
@@ -148,7 +154,7 @@ median(totalstep2$steps)
 
 ## Are there differences in activity patterns between weekdays and weekends?   
 
-* Create a new factor variable in the dataset with two levels â€œweekdayâ€ and â€œweekendâ€ indicating whether a given date is a weekday or weekend day.
+* Create a new factor variable in the dataset with two levels ¡§weekday¡¨ and ¡§weekend¡¨ indicating whether a given date is a weekday or weekend day.
 
 ```r
 activity.new$day=ifelse(as.POSIXlt(activity.new$date)$wday%%6==0,"weekends","weekday") 
@@ -165,4 +171,4 @@ intervalByDay=aggregate(steps~interval+day,activity.new,mean)
 xyplot(steps~interval|factor(day),data=intervalByDay,aspect=0.5,type="l")
 ```
 
-![](./PA1_template_files/figure-html/unnamed-chunk-12-1.png) 
+![plot of chunk unnamed-chunk-12](figure/unnamed-chunk-12-1.png) 
